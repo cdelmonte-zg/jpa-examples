@@ -25,37 +25,30 @@ public class SpringDataConfiguration {
         dataSource.setPassword("jpaexamplesdbsecret");
         return dataSource;
     }
- 
+
     @Bean
-    public JpaTransactionManager
-           transactionManager(EntityManagerFactory emf) {
+    public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
     }
- 
+
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
-        HibernateJpaVendorAdapter jpaVendorAdapter = new
-                 HibernateJpaVendorAdapter();
+        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setDatabase(Database.POSTGRESQL);
         jpaVendorAdapter.setShowSql(true);
         return jpaVendorAdapter;
     }
- 
-    @Bean 
+
+    @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean
-          localContainerEntityManagerFactoryBean =
-                new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource());
         Properties properties = new Properties();
         properties.put("hibernate.hbm2ddl.auto", "create");
         properties.put("log4j.logger.org.hibernate.SQL", "DEBUG");
-        localContainerEntityManagerFactoryBean.
-                setJpaProperties(properties);
-        localContainerEntityManagerFactoryBean.
-                setJpaVendorAdapter(jpaVendorAdapter());
-        localContainerEntityManagerFactoryBean.
-                setPackagesToScan("de.cdelmonte.playground.java.jpaexamples.*");
+        localContainerEntityManagerFactoryBean.setJpaProperties(properties);
+        localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+        localContainerEntityManagerFactoryBean.setPackagesToScan("de.cdelmonte.playground.java.jpaexamples.*");
         return localContainerEntityManagerFactoryBean;
     }
 }
