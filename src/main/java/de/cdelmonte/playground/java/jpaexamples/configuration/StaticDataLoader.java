@@ -1,27 +1,24 @@
 package de.cdelmonte.playground.java.jpaexamples.configuration;
 
-import java.time.LocalDate;
-import java.time.Month;
-
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import de.cdelmonte.playground.java.jpaexamples.user.domain.User;
-import de.cdelmonte.playground.java.jpaexamples.user.domain.UserRepository;
+import de.cdelmonte.playground.java.jpaexamples.staticdata.domain.SomeStaticData;
+import de.cdelmonte.playground.java.jpaexamples.staticdata.domain.SomeStaticDataRepository;
 
 @Configuration
 public class StaticDataLoader {
 
     @Bean
-    public ApplicationRunner loadStaticDataForUser(UserRepository repository) {
+    public ApplicationRunner loadStaticDataForUser(SomeStaticDataRepository repository) {
 
         return env -> {
-            User michael = new User("Micki", LocalDate.now());
-            User lisbeth = new User("liz94", LocalDate.of(2020, Month.DECEMBER, 24));
-
-            repository.save(michael);
-            repository.save(lisbeth);
+            SomeStaticData data1 = new SomeStaticData("DATA001");
+            SomeStaticData data2 = new SomeStaticData("DATA002");
+            
+            repository.save(data1);
+            repository.save(data2);
 
             repository.findAll().forEach(System.out::println);
         };

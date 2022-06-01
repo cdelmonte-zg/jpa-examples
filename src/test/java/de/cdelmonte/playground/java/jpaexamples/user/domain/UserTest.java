@@ -17,7 +17,7 @@ public class UserTest extends SpringDataJpaApplicationTests{
     @Test
     void testFindAll() {
         Set<User> users =  Streamable.of(userRepository.findAll()).toSet();
-        assertEquals(4, users.size());
+        assertEquals(2, users.size());
     }
 
     @Test
@@ -29,17 +29,17 @@ public class UserTest extends SpringDataJpaApplicationTests{
     @Test
     void testFindAllByOrderByUsernameAsc() {
         List<User> users =  List.copyOf(userRepository.findAllByOrderByUsernameAsc());
-        assertAll(() -> assertEquals(4, users.size()),
+        assertAll(() -> assertEquals(2, users.size()),
                 () -> assertEquals("alice", users.get(0).getUsername()),
-                () -> assertEquals("Micki", 
+                () -> assertEquals("bob", 
                        users.get(users.size() - 1).getUsername()));
     }
 
     @Test
     void testFindByRegistrationDateBetween() {
         List<User> users = userRepository.findByRegistrationDateBetween(
-                LocalDate.of(2020, Month.JULY, 1),
-                LocalDate.of(2020, Month.DECEMBER, 31));
+                LocalDate.of(2018, Month.JULY, 1),
+                LocalDate.of(2021, Month.DECEMBER, 31));
         assertEquals(1, users.size());
     } 
 }

@@ -36,7 +36,7 @@ public abstract class SpringDataJpaApplicationTests {
     private static Set<User> generateData() {
         Set<User> users = new HashSet<>();
 
-        User bob = new User("bob", LocalDate.of(2020, Month.APRIL, 13));
+        User bob = new User("bob", LocalDate.of(2018, Month.APRIL, 13));
         bob.setEmail("bob@somedomain.com");
         bob.setLevel(1);
         bob.setActive(true);

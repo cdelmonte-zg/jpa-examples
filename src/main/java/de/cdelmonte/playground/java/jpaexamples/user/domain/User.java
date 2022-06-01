@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnTransformer;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -62,6 +64,7 @@ public class User {
  
     private boolean active;
 
+    @Column(name ="registration_date")
     private LocalDate registrationDate;
 
     /**
