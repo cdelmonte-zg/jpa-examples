@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -46,6 +47,7 @@ public class SpringDataConfiguration {
         Properties properties = new Properties();
         properties.put("hibernate.hbm2ddl.auto", "create");
         properties.put("log4j.logger.org.hibernate.SQL", "DEBUG");
+        properties.put(Environment.USE_STREAMS_FOR_BINARY, "true");
         localContainerEntityManagerFactoryBean.setJpaProperties(properties);
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         localContainerEntityManagerFactoryBean.setPackagesToScan("de.cdelmonte.playground.java.jpaexamples.*");

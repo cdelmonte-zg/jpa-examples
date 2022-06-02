@@ -7,4 +7,6 @@ public interface CustomPictureRepository {
     public Picture addPictureWithImage(ByteArrayInputStream imageInputStream);
 
     public ByteArrayOutputStream getImageOfPicture(Long id) throws Exception;
+
+    public Picture addPictureWithImageAsByteA(ByteArrayInputStream imageInputStream);
 }

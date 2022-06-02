@@ -19,7 +19,7 @@ public class CustomPictureRepositoryImpl implements CustomPictureRepository {
     @Override
     public ByteArrayOutputStream getImageOfPicture(Long id) throws Exception {
         Picture picture = em.find(Picture.class, id);
-        InputStream imageDataStream = picture.getImageBlob().getBinaryStream();
+        InputStream imageDataStream = picture.getImageBlobLob().getBinaryStream();
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
         StreamUtils.copy(imageDataStream, outStream);
@@ -35,7 +35,16 @@ public class CustomPictureRepositoryImpl implements CustomPictureRepository {
         Session session = em.unwrap(Session.class);
         Blob blob = session.getLobHelper()
                 .createBlob(imageInputStream, 1024);
-        picture.setImageBlob(blob);
+        picture.setImageBlobLob(blob);
+        em.persist(picture);
+
+        return picture;
+    }
+
+    @Override
+    public Picture addPictureWithImageAsByteA(ByteArrayInputStream imageInputStream) {
+        Picture picture = new Picture();
+        picture.setImageBlobByteA(imageInputStream.readAllBytes());
         em.persist(picture);
 
         return picture;
